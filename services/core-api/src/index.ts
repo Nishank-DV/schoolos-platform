@@ -89,6 +89,7 @@ function isAllowedOrigin(origin: string) {
 
 app.use(helmet({ contentSecurityPolicy: false }));
 app.use(requestIdMiddleware);
+app.set("trust proxy", 1);
 app.use(createRateLimiter());
 app.use(cors({
   origin: (origin: string | undefined, callback: CorsOriginCallback) => {
