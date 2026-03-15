@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="SchoolOS Student">
+  <rect width="512" height="512" rx="96" fill="#0f172a"/>
+  <circle cx="256" cy="192" r="88" fill="#34d399"/>
+  <path d="M96 360c48-52 116-80 160-80s112 28 160 80v56H96z" fill="#ecfeff"/>
+  <text x="256" y="472" text-anchor="middle" font-size="36" font-family="Verdana, sans-serif" fill="#f8fafc">Student</text>
+</svg>

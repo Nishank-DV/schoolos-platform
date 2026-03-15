@@ -1,0 +1,17 @@
+FROM node:20-alpine
+WORKDIR /app
+COPY package.json package-lock.json* ./
+COPY prisma ./prisma/
+COPY packages/shared-types ./packages/shared-types/
+COPY packages/shared-utils ./packages/shared-utils/
+COPY services/core-api ./services/core-api/
+COPY tsconfig.base.json ./
+RUN npm install
+RUN npx prisma generate --schema=prisma/schema.prisma
+RUN npm run build -w shared-types 2>/dev/null || true
+RUN npm run build -w shared-utils 2>/dev/null || true
+RUN npm run build -w core-api
+ENV NODE_ENV=production
+WORKDIR /app/services/core-api
+EXPOSE 4000
+CMD ["node", "dist/index.js"]

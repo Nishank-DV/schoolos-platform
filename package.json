@@ -1,0 +1,31 @@
+{
+  "name": "schoolos-platform",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "services/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:api\" \"npm run dev:admin\" \"npm run dev:student\" \"npm run dev:parent\"",
+    "dev:api": "npm run dev -w core-api",
+    "dev:admin": "npm run dev -w admin-dashboard",
+    "dev:student": "npm run dev -w student-portal",
+    "dev:parent": "npm run dev -w parent-portal",
+    "build": "npm run build -w shared-types && npm run build -w shared-utils && npm run build -w core-api && npm run build -w admin-dashboard && npm run build -w student-portal && npm run build -w parent-portal",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:migrate": "prisma migrate dev",
+    "db:seed": "tsx prisma/seed.ts",
+    "db:studio": "prisma studio",
+    "docker:up": "docker-compose -f docker/docker-compose.yml up -d",
+    "docker:down": "docker-compose -f docker/docker-compose.yml down"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "prisma": "^5.22.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3"
+  }
+}

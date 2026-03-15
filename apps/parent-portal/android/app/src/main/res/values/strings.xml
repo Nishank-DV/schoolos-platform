@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">SchoolOS Parent</string>
+    <string name="title_activity_main">SchoolOS Parent</string>
+    <string name="package_name">com.schoolos.parent</string>
+    <string name="custom_url_scheme">com.schoolos.parent</string>
+</resources>

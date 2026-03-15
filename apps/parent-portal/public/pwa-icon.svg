@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="SchoolOS Parent">
+  <rect width="512" height="512" rx="96" fill="#0f172a"/>
+  <circle cx="192" cy="188" r="74" fill="#60a5fa"/>
+  <circle cx="320" cy="212" r="64" fill="#c4b5fd"/>
+  <path d="M84 360c34-52 84-78 128-78s94 26 128 78v56H84z" fill="#f8fafc"/>
+  <text x="256" y="472" text-anchor="middle" font-size="36" font-family="Verdana, sans-serif" fill="#f8fafc">Parent</text>
+</svg>
