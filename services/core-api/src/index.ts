@@ -34,6 +34,9 @@ import { checkDatabase } from "./lib/health.js";
 const env = getEnv();
 const app = express();
 
+type CorsStaticOrigin = boolean | string | RegExp | Array<boolean | string | RegExp>;
+type CorsOriginCallback = (err: Error | null, origin?: CorsStaticOrigin) => void;
+
 const defaultDevOrigins = [
   "http://localhost:3000",
   "http://localhost:3001",
@@ -88,7 +91,7 @@ app.use(helmet({ contentSecurityPolicy: false }));
 app.use(requestIdMiddleware);
 app.use(createRateLimiter());
 app.use(cors({
-  origin: (origin, callback) => {
+  origin: (origin: string | undefined, callback: CorsOriginCallback) => {
     // Non-browser/server-to-server requests can omit Origin.
     if (!origin) return callback(null, true);
 
