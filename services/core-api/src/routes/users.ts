@@ -39,6 +39,10 @@ function deriveNamesFromEmail(email: string) {
   return { firstName, lastName };
 }
 
+function asStringOrNull(value: unknown): string | null {
+  return typeof value === "string" ? value : null;
+}
+
 export const usersRouter = Router();
 usersRouter.use(authMiddleware);
 
@@ -110,7 +114,7 @@ usersRouter.get("/", requireRoles("superadmin", "school_admin"), validateQuery(p
 });
 
 // Create user (admin) – set role and optionally link to student/parent/teacher
-usersRouter.post("/", requireRoles("superadmin", "school_admin"), auditLog("user.create", "User", (req) => req.body?.email ?? null), async (req, res) => {
+usersRouter.post("/", requireRoles("superadmin", "school_admin"), auditLog("user.create", "User", (req) => asStringOrNull(req.body?.email)), async (req, res) => {
   const parsed = createUserSchema.safeParse(req.body);
   if (!parsed.success) {
     return res.status(400).json({ success: false, error: parsed.error.message });
@@ -206,7 +210,7 @@ usersRouter.post("/", requireRoles("superadmin", "school_admin"), auditLog("user
 });
 
 // Update user (role / links) – admin only
-usersRouter.patch("/:id", requireRoles("superadmin", "school_admin"), auditLog("user.update", "User", (req) => req.params.id), async (req, res) => {
+usersRouter.patch("/:id", requireRoles("superadmin", "school_admin"), auditLog("user.update", "User", (req) => asStringOrNull(req.params.id)), async (req, res) => {
   const parsed = idParam.safeParse(req.params);
   if (!parsed.success) return res.status(400).json({ success: false, error: "Invalid id" });
   const target = await prisma.user.findUnique({ where: { id: parsed.data.id } });
@@ -234,7 +238,7 @@ usersRouter.patch("/:id", requireRoles("superadmin", "school_admin"), auditLog("
 });
 
 // Delete user – superadmin or school_admin (own school only)
-usersRouter.delete("/:id", requireRoles("superadmin", "school_admin"), auditLog("user.delete", "User", (req) => req.params.id), async (req, res) => {
+usersRouter.delete("/:id", requireRoles("superadmin", "school_admin"), auditLog("user.delete", "User", (req) => asStringOrNull(req.params.id)), async (req, res) => {
   const parsed = idParam.safeParse(req.params);
   if (!parsed.success) return res.status(400).json({ success: false, error: "Invalid id" });
   const target = await prisma.user.findUnique({ where: { id: parsed.data.id } });
