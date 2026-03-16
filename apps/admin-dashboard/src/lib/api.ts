@@ -1,4 +1,35 @@
-export const API_BASE = (import.meta.env.VITE_API_URL || "").replace(/\/$/, "");
+function normalizeBaseUrl(value: string) {
+  return value.trim().replace(/\/$/, "");
+}
+
+function isNativeRuntime() {
+  const w = globalThis as typeof globalThis & { Capacitor?: { isNativePlatform?: () => boolean } };
+  return Boolean(w.Capacitor?.isNativePlatform?.());
+}
+
+function looksLikeLocalhost(url: string) {
+  return /https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(url);
+}
+
+function resolveApiBase() {
+  const webApiBase = normalizeBaseUrl(import.meta.env.VITE_API_URL || "");
+  const mobileApiBase = normalizeBaseUrl(import.meta.env.VITE_MOBILE_API_URL || "");
+  const apiBase = isNativeRuntime() ? (mobileApiBase || webApiBase) : webApiBase;
+
+  if (!apiBase) return "";
+
+  if (apiBase.includes("YOUR_LIVE_API_URL") || looksLikeLocalhost(apiBase)) {
+    throw new Error("Invalid API base URL for production mobile build. Set VITE_MOBILE_API_URL or VITE_API_URL to your deployed HTTPS backend.");
+  }
+
+  if (isNativeRuntime() && !apiBase.startsWith("https://")) {
+    throw new Error("Capacitor Android production build requires HTTPS API URL.");
+  }
+
+  return apiBase;
+}
+
+export const API_BASE = resolveApiBase();
 
 const ALLOWED_PAGE_SIZES = [10, 20, 50, 100] as const;
 
