@@ -100,7 +100,6 @@ const examMarksQuery = z.object({
 });
 
 export const examsRouter = Router();
-examsRouter.use(authMiddleware);
 
 function getSchoolId(req: import("express").Request, input?: string) {
   if (req.user!.role === "superadmin") return input ?? (req.query.schoolId as string | undefined);
@@ -222,6 +221,7 @@ async function ensureStudentAccess(req: import("express").Request, studentId: st
 // GET /api/exams
 examsRouter.get(
   "/exams",
+  authMiddleware,
   requireRoles("superadmin", "school_admin", "teacher"),
   validateQuery(examListQuery),
   async (req, res) => {
@@ -267,6 +267,7 @@ examsRouter.get(
 // POST /api/exams
 examsRouter.post(
   "/exams",
+  authMiddleware,
   requireRoles("superadmin", "school_admin", "teacher"),
   auditLog("exam.create", "Exam", (req) => req.body?.name ?? null),
   validateBody(createExamSchema),
@@ -309,6 +310,7 @@ examsRouter.post(
 // GET /api/exams/:id
 examsRouter.get(
   "/exams/:id",
+  authMiddleware,
   requireRoles("superadmin", "school_admin", "teacher"),
   validateParams(idParam),
   async (req, res) => {
@@ -348,6 +350,7 @@ examsRouter.get(
 // PATCH /api/exams/:id
 examsRouter.patch(
   "/exams/:id",
+  authMiddleware,
   requireRoles("superadmin", "school_admin", "teacher"),
   auditLog("exam.update", "Exam", (req) => req.params.id),
   validateParams(idParam),
@@ -388,6 +391,7 @@ examsRouter.patch(
 // DELETE /api/exams/:id
 examsRouter.delete(
   "/exams/:id",
+  authMiddleware,
   requireRoles("superadmin", "school_admin", "teacher"),
   auditLog("exam.delete", "Exam", (req) => req.params.id),
   validateParams(idParam),
@@ -422,6 +426,7 @@ examsRouter.delete(
 // POST /api/exams/:id/subjects
 examsRouter.post(
   "/exams/:id/subjects",
+  authMiddleware,
   requireRoles("superadmin", "school_admin", "teacher"),
   auditLog("exam.subject.create", "ExamSubject", (req) => req.params.id),
   validateParams(idParam),
@@ -463,6 +468,7 @@ examsRouter.post(
 // GET /api/exams/:id/subjects
 examsRouter.get(
   "/exams/:id/subjects",
+  authMiddleware,
   requireRoles("superadmin", "school_admin", "teacher"),
   validateParams(idParam),
   async (req, res) => {
@@ -494,6 +500,7 @@ examsRouter.get(
 // PATCH /api/exam-subjects/:id
 examsRouter.patch(
   "/exam-subjects/:id",
+  authMiddleware,
   requireRoles("superadmin", "school_admin", "teacher"),
   auditLog("exam.subject.update", "ExamSubject", (req) => req.params.id),
   validateParams(idParam),
@@ -548,6 +555,7 @@ examsRouter.patch(
 // DELETE /api/exam-subjects/:id
 examsRouter.delete(
   "/exam-subjects/:id",
+  authMiddleware,
   requireRoles("superadmin", "school_admin", "teacher"),
   auditLog("exam.subject.delete", "ExamSubject", (req) => req.params.id),
   validateParams(idParam),
@@ -582,6 +590,7 @@ examsRouter.delete(
 // POST /api/exams/:id/marks
 examsRouter.post(
   "/exams/:id/marks",
+  authMiddleware,
   requireRoles("superadmin", "school_admin", "teacher"),
   auditLog("exam.mark.upsert", "StudentMark", (req) => req.params.id),
   validateParams(idParam),
@@ -668,6 +677,7 @@ examsRouter.post(
 // PATCH /api/marks/:id
 examsRouter.patch(
   "/marks/:id",
+  authMiddleware,
   requireRoles("superadmin", "school_admin", "teacher"),
   auditLog("exam.mark.update", "StudentMark", (req) => req.params.id),
   validateParams(idParam),
@@ -718,6 +728,7 @@ examsRouter.patch(
 // GET /api/exams/:id/marks
 examsRouter.get(
   "/exams/:id/marks",
+  authMiddleware,
   requireRoles("superadmin", "school_admin", "teacher"),
   validateParams(idParam),
   validateQuery(examMarksQuery),
@@ -749,6 +760,7 @@ examsRouter.get(
 // GET /api/results/student/:studentId
 examsRouter.get(
   "/results/student/:studentId",
+  authMiddleware,
   requireRoles("superadmin", "school_admin", "teacher", "parent", "student"),
   validateParams(studentIdParam),
   validateQuery(studentResultsQuery),
@@ -779,6 +791,7 @@ examsRouter.get(
 // GET /api/results/exam/:examId
 examsRouter.get(
   "/results/exam/:examId",
+  authMiddleware,
   requireRoles("superadmin", "school_admin", "teacher"),
   validateParams(examIdParam),
   async (req, res) => {
@@ -828,6 +841,7 @@ examsRouter.get(
 // GET /api/results/class/:classId
 examsRouter.get(
   "/results/class/:classId",
+  authMiddleware,
   requireRoles("superadmin", "school_admin", "teacher"),
   validateParams(classIdParam),
   validateQuery(classResultsQuery),
@@ -879,6 +893,7 @@ examsRouter.get(
 // GET /api/report-card/:studentId/:examId
 examsRouter.get(
   "/report-card/:studentId/:examId",
+  authMiddleware,
   requireRoles("superadmin", "school_admin", "teacher", "parent", "student"),
   validateParams(reportCardParams),
   async (req, res) => {
