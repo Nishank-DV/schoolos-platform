@@ -569,7 +569,7 @@ export default function Attendance() {
                 <option value="">Select student</option>
                 {students.map((s) => <option key={s.id} value={s.id}>{s.firstName} {s.lastName} ({s.admissionNumber})</option>)}
               </select>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 <input type="date" value={studentReportForm.from} onChange={(e) => setStudentReportForm((prev) => ({ ...prev, from: e.target.value }))} className="rounded-lg border px-3 py-2" />
                 <input type="date" value={studentReportForm.to} onChange={(e) => setStudentReportForm((prev) => ({ ...prev, to: e.target.value }))} className="rounded-lg border px-3 py-2" />
               </div>
@@ -600,7 +600,7 @@ export default function Attendance() {
                 <option value="">All years</option>
                 {years.map((y) => <option key={y.id} value={y.id}>{y.name}{y.isActive ? " (Active)" : ""}</option>)}
               </select>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 <input type="date" value={classReportForm.from} onChange={(e) => setClassReportForm((prev) => ({ ...prev, from: e.target.value }))} className="rounded-lg border px-3 py-2" />
                 <input type="date" value={classReportForm.to} onChange={(e) => setClassReportForm((prev) => ({ ...prev, to: e.target.value }))} className="rounded-lg border px-3 py-2" />
               </div>

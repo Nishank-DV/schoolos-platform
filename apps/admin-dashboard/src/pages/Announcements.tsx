@@ -164,7 +164,7 @@ export default function Announcements() {
             <h2 className="font-semibold">Create Announcement</h2>
             <input value={form.title} onChange={(e) => setForm((f) => ({ ...f, title: e.target.value }))} className="w-full rounded-lg border px-3 py-2 text-sm" placeholder="Title" required />
             <textarea value={form.body} onChange={(e) => setForm((f) => ({ ...f, body: e.target.value }))} className="w-full rounded-lg border px-3 py-2 text-sm" rows={5} placeholder="Announcement body" required />
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               <select value={form.priority} onChange={(e) => setForm((f) => ({ ...f, priority: e.target.value as Priority }))} className="rounded-lg border px-3 py-2 text-sm">
                 <option value="low">Low</option>
                 <option value="normal">Normal</option>
@@ -176,7 +176,7 @@ export default function Announcements() {
                 <option value="parents">Parents</option>
               </select>
             </div>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               <input type="date" value={form.expiresAt} onChange={(e) => setForm((f) => ({ ...f, expiresAt: e.target.value }))} className="rounded-lg border px-3 py-2 text-sm" />
               <label className="flex items-center gap-2 rounded-lg border px-3 py-2 text-sm">
                 <input type="checkbox" checked={form.isPublished} onChange={(e) => setForm((f) => ({ ...f, isPublished: e.target.checked }))} />

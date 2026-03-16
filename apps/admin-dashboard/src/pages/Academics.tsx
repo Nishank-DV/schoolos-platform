@@ -325,7 +325,7 @@ export default function Academics() {
             <h2 className="font-semibold">Create class</h2>
             <input value={classForm.name} onChange={(e) => setClassForm((f) => ({ ...f, name: e.target.value }))} placeholder="Class name" className="w-full rounded-lg border px-3 py-2" required />
             <input value={classForm.description} onChange={(e) => setClassForm((f) => ({ ...f, description: e.target.value }))} placeholder="Description" className="w-full rounded-lg border px-3 py-2" />
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               <input type="number" value={classForm.grade} onChange={(e) => setClassForm((f) => ({ ...f, grade: Number(e.target.value) }))} placeholder="Grade" className="w-full rounded-lg border px-3 py-2" min={1} max={12} required />
               <input value={classForm.section} onChange={(e) => setClassForm((f) => ({ ...f, section: e.target.value }))} placeholder="Default section" className="w-full rounded-lg border px-3 py-2" required />
             </div>
@@ -494,7 +494,7 @@ export default function Academics() {
           <form onSubmit={createYear} className="rounded-xl border bg-white p-4 space-y-3">
             <h2 className="font-semibold">Create academic year</h2>
             <input value={yearForm.name} onChange={(e) => setYearForm((f) => ({ ...f, name: e.target.value }))} placeholder="Name (e.g. 2026-27)" className="w-full rounded-lg border px-3 py-2" required />
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               <input type="date" value={yearForm.startDate} onChange={(e) => setYearForm((f) => ({ ...f, startDate: e.target.value }))} className="w-full rounded-lg border px-3 py-2" required />
               <input type="date" value={yearForm.endDate} onChange={(e) => setYearForm((f) => ({ ...f, endDate: e.target.value }))} className="w-full rounded-lg border px-3 py-2" required />
             </div>

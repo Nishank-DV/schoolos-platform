@@ -162,7 +162,7 @@ export default function Analytics() {
                     </div>
                     <p className="text-sm font-semibold">{riskBadgeLabel(risk.riskLevel)}</p>
                   </div>
-                  <div className="mt-3 grid grid-cols-2 gap-2 text-xs md:grid-cols-4">
+                  <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs md:grid-cols-4">
                     <div>
                       <p className="text-slate-500">Attendance</p>
                       <p className="font-semibold">{risk.metrics.attendanceRate}%</p>

@@ -256,11 +256,11 @@ export default function Finance() {
             <h2 className="font-semibold">Create Fee Structure</h2>
             <input value={newStructure.name} onChange={(e) => setNewStructure((s) => ({ ...s, name: e.target.value }))} className="w-full rounded-lg border px-3 py-2 text-sm" placeholder="Structure name" required />
             <input type="number" value={newStructure.amount} onChange={(e) => setNewStructure((s) => ({ ...s, amount: Number(e.target.value) }))} className="w-full rounded-lg border px-3 py-2 text-sm" min={1} placeholder="Amount" required />
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               <input type="number" value={newStructure.grade} onChange={(e) => setNewStructure((s) => ({ ...s, grade: e.target.value ? Number(e.target.value) : "" }))} className="w-full rounded-lg border px-3 py-2 text-sm" min={1} max={12} placeholder="Grade (optional)" />
               <input type="number" value={newStructure.installments} onChange={(e) => setNewStructure((s) => ({ ...s, installments: Number(e.target.value) }))} className="w-full rounded-lg border px-3 py-2 text-sm" min={1} max={24} placeholder="Installments" required />
             </div>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               <input type="number" value={newStructure.lateFeePercent} onChange={(e) => setNewStructure((s) => ({ ...s, lateFeePercent: e.target.value ? Number(e.target.value) : "" }))} className="w-full rounded-lg border px-3 py-2 text-sm" min={0} max={100} placeholder="Late fee %" />
               <input type="number" value={newStructure.discountPercent} onChange={(e) => setNewStructure((s) => ({ ...s, discountPercent: e.target.value ? Number(e.target.value) : "" }))} className="w-full rounded-lg border px-3 py-2 text-sm" min={0} max={100} placeholder="Discount %" />
             </div>

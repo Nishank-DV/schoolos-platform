@@ -329,7 +329,7 @@ export default function Assignments() {
             </select>
             <input value={form.title} onChange={(e) => setForm((f) => ({ ...f, title: e.target.value }))} placeholder="Title" className="w-full rounded-lg border px-3 py-2 text-sm" required />
             <textarea value={form.description} onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))} placeholder="Description (optional)" className="w-full rounded-lg border px-3 py-2 text-sm" rows={3} />
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               <input type="date" value={form.dueDate} onChange={(e) => setForm((f) => ({ ...f, dueDate: e.target.value }))} className="w-full rounded-lg border px-3 py-2 text-sm" required />
               <input type="number" value={form.maxMarks} onChange={(e) => setForm((f) => ({ ...f, maxMarks: Number(e.target.value) }))} placeholder="Max marks" className="w-full rounded-lg border px-3 py-2 text-sm" min={1} required />
             </div>

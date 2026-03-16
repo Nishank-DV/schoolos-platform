@@ -16,28 +16,30 @@ export default function Layout() {
   const location = useLocation();
 
   return (
-    <div className="min-h-screen flex flex-col max-w-lg mx-auto bg-white shadow-lg">
-      <header className="p-4 border-b flex justify-between items-center">
-        <h1 className="font-bold text-lg">SchoolOS Student</h1>
-        <button type="button" onClick={logout} className="text-sm text-slate-500">Logout</button>
-      </header>
-      <nav className="flex gap-2 p-2 border-b bg-slate-50 overflow-x-auto">
-        {nav.map(({ to, label }) => {
-          const active = to === "/" ? location.pathname === "/" : location.pathname.startsWith(to);
-          return (
-            <Link
-              key={to}
-              to={to}
-              className={`px-3 py-2 rounded-lg text-sm whitespace-nowrap ${active ? "bg-primary-600 text-white" : "text-slate-600"}`}
-            >
-              {label}
-            </Link>
-          );
-        })}
-      </nav>
-      <main className="flex-1 p-4 overflow-auto">
-        <Outlet />
-      </main>
+    <div className="min-h-screen bg-slate-50">
+      <div className="mx-auto flex min-h-screen w-full max-w-6xl flex-col bg-white shadow-sm sm:shadow-lg">
+        <header className="p-4 border-b flex justify-between items-center">
+          <h1 className="font-bold text-lg">SchoolOS Student</h1>
+          <button type="button" onClick={logout} className="text-sm text-slate-500">Logout</button>
+        </header>
+        <nav className="flex gap-2 p-2 border-b bg-slate-50 overflow-x-auto">
+          {nav.map(({ to, label }) => {
+            const active = to === "/" ? location.pathname === "/" : location.pathname.startsWith(to);
+            return (
+              <Link
+                key={to}
+                to={to}
+                className={`px-3 py-2 rounded-lg text-sm whitespace-nowrap ${active ? "bg-primary-600 text-white" : "text-slate-600"}`}
+              >
+                {label}
+              </Link>
+            );
+          })}
+        </nav>
+        <main className="min-w-0 flex-1 overflow-x-hidden overflow-y-auto p-4 sm:p-5">
+          <Outlet />
+        </main>
+      </div>
     </div>
   );
 }

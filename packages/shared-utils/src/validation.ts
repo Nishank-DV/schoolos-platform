@@ -1,8 +1,34 @@
 import { z } from "zod";
 
+const ALLOWED_PAGE_SIZES = [10, 20, 50, 100] as const;
+const DEFAULT_PAGE_SIZE = 20;
+
+function normalizePage(value: unknown): number {
+  const parsed = Number(value);
+  if (!Number.isFinite(parsed)) return 1;
+  return Math.max(1, Math.trunc(parsed));
+}
+
+function normalizePageSize(value: unknown): number {
+  const parsed = Number(value);
+  if (!Number.isFinite(parsed)) return DEFAULT_PAGE_SIZE;
+
+  const clamped = Math.min(100, Math.max(1, Math.trunc(parsed)));
+  const candidate = [...ALLOWED_PAGE_SIZES].reverse().find((size) => clamped >= size);
+  return candidate ?? ALLOWED_PAGE_SIZES[0];
+}
+
 export const paginationSchema = z.object({
-  page: z.coerce.number().int().min(1).default(1),
-  pageSize: z.coerce.number().int().min(1).max(100).default(20),
+  page: z.preprocess((value) => normalizePage(value), z.number().int().min(1)).default(1),
+  pageSize: z.preprocess(
+    (value) => normalizePageSize(value),
+    z.union([
+      z.literal(ALLOWED_PAGE_SIZES[0]),
+      z.literal(ALLOWED_PAGE_SIZES[1]),
+      z.literal(ALLOWED_PAGE_SIZES[2]),
+      z.literal(ALLOWED_PAGE_SIZES[3]),
+    ])
+  ).default(DEFAULT_PAGE_SIZE),
 });
 
 export const idParamSchema = z.object({

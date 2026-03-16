@@ -340,7 +340,7 @@ export default function Exams() {
             </select>
             <input value={examForm.name} onChange={(e) => setExamForm((f) => ({ ...f, name: e.target.value }))} className="w-full rounded-lg border px-3 py-2 text-sm" placeholder="Exam name" required />
             <textarea value={examForm.description} onChange={(e) => setExamForm((f) => ({ ...f, description: e.target.value }))} className="w-full rounded-lg border px-3 py-2 text-sm" rows={3} placeholder="Description (optional)" />
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               <input type="date" value={examForm.startDate} onChange={(e) => setExamForm((f) => ({ ...f, startDate: e.target.value }))} className="w-full rounded-lg border px-3 py-2 text-sm" required />
               <input type="date" value={examForm.endDate} onChange={(e) => setExamForm((f) => ({ ...f, endDate: e.target.value }))} className="w-full rounded-lg border px-3 py-2 text-sm" required />
             </div>
@@ -408,7 +408,7 @@ export default function Exams() {
               <option value="">Select subject</option>
               {subjectOptions.map((subject) => <option key={subject.id} value={subject.id}>{subject.name}</option>)}
             </select>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               <input type="number" value={subjectForm.maxMarks} onChange={(e) => setSubjectForm((f) => ({ ...f, maxMarks: Number(e.target.value) }))} className="w-full rounded-lg border px-3 py-2 text-sm" min={1} required />
               <input type="number" value={subjectForm.passMarks} onChange={(e) => setSubjectForm((f) => ({ ...f, passMarks: Number(e.target.value) }))} className="w-full rounded-lg border px-3 py-2 text-sm" min={0} required />
             </div>

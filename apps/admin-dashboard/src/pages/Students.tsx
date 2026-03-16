@@ -218,7 +218,7 @@ export default function Students() {
           <h2 className="font-medium mb-3">New student</h2>
           <form onSubmit={handleCreate} className="space-y-3">
             {error && <p className="text-sm text-red-600">{error}</p>}
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label className="block text-sm text-slate-600">Admission #</label>
                 <input
@@ -241,7 +241,7 @@ export default function Students() {
                 </select>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label className="block text-sm text-slate-600">First name</label>
                 <input
@@ -261,7 +261,7 @@ export default function Students() {
                 />
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label className="block text-sm text-slate-600">Section</label>
                 <input
@@ -295,7 +295,7 @@ export default function Students() {
                 <span className="text-sm">Create login for this student</span>
               </label>
               {form.createLogin && (
-                <div className="mt-2 grid grid-cols-2 gap-2">
+                <div className="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-2">
                   <input
                     type="email"
                     placeholder="Login email"
@@ -327,7 +327,7 @@ export default function Students() {
           <h2 className="font-medium mb-3">Edit: {editing.firstName} {editing.lastName}</h2>
           <form onSubmit={handleUpdate} className="space-y-3">
             {error && <p className="text-sm text-red-600">{error}</p>}
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label className="block text-sm text-slate-600">Grade</label>
                 <select
